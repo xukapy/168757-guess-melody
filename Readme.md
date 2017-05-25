@@ -1,7 +1,7 @@
 # Личный проект «Угадай мелодию» [![Build status][travis-image]][travis-url]
 
 * Студент: [Сергей Кущенко](https://up.htmlacademy.ru/ecmascript/2/user/168757).
-* Наставник: `Неизвестно`.
+* Наставник: [Вадим Горбачев](https://up.htmlacademy.ru/ecmascript/2/user/242361).
 
 ---
 
