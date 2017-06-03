@@ -13,20 +13,58 @@ const Keys = {
  */
 const windowArray = [];
 
+/**
+ * Контейнер основного окна в разметке
+ * @type {Element}
+ */
 const mainSection = document.querySelector(`div.app section.main`);
+
+/**
+ * Шаблон с игровыми окнами
+ * и не только
+ * @type {Element}
+ */
 const template = document.querySelector(`#templates`);
+
+/**
+ * Список элементов с игровыми окнами
+ * @type {NodeList}
+ */
 const windowList = template.content.querySelectorAll(`section.main`);
-const maxWindowIndex = windowList.length;
+
+/**
+ * Максимальный индекс окна
+ * @type {number}
+ */
+const maxWindowIndex = windowList.length - 1;
+
+/**
+ * Индекс текущего окна
+ * @type {number}
+ */
 let currentWindowIndex;
+
+/**
+ * Индекс стартевого окна
+ * @type {number}
+ */
+let startWindowIndex;
 
 for (let i = 0; i < windowList.length; i++) {
   windowArray[i] = windowList[i].cloneNode(true);
   if (windowArray[i].classList.contains(`main--welcome`)) {
-    currentWindowIndex = i;
+    startWindowIndex = i;
   }
 }
 
+/**
+ * Отображение игрового окна по индексу
+ * @param {number} index
+ */
 const showWindow = (index) => {
+  if (index === currentWindowIndex) {
+    return;
+  }
   const previousWindow = mainSection.querySelector(`section.main`);
   if (previousWindow) {
     mainSection.removeChild(previousWindow);
@@ -36,9 +74,12 @@ const showWindow = (index) => {
 };
 
 const onDocumentKeyDown = (event) => {
+  if (!event.altKey) {
+    return;
+  }
   switch (event.keyCode) {
     case Keys.right:
-      if (currentWindowIndex < maxWindowIndex - 1) {
+      if (currentWindowIndex < maxWindowIndex) {
         showWindow(currentWindowIndex + 1);
       }
       break;
@@ -52,4 +93,4 @@ const onDocumentKeyDown = (event) => {
 
 document.addEventListener(`keydown`, onDocumentKeyDown);
 
-showWindow(currentWindowIndex);
+showWindow(startWindowIndex);
