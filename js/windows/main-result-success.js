@@ -1,8 +1,9 @@
-import getElementFromTemplate from './template-utils';
-import showWindow from './template-render';
+import getElementFromTemplate from '../template-utils';
+import showWindow from '../template-render';
 import mainWelcome from './main-welcome';
 
-const mainResultSuccess = getElementFromTemplate(`  <!-- Результат игры -->
+const mainResultSuccess = () => {
+  const element = getElementFromTemplate(`  <!-- Результат игры -->
   <section class="main main--result">
     <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
  
@@ -11,11 +12,12 @@ const mainResultSuccess = getElementFromTemplate(`  <!-- Результат иг
     <span class="main-comparison">Это&nbsp;лучше чем у&nbsp;80%&nbsp;игроков</span>
     <span role="button" tabindex="0" class="main-replay">Сыграть ещё раз</span>
   </section>`);
-
-/**
- * Кнопка «Сыграть еще раз» на последнем экране (экран результатов или экран поражения)
- * должна открывать первый экран.
- */
-mainResultSuccess.querySelector(`.main-replay`).addEventListener(`click`, () => showWindow(mainWelcome));
+  /**
+   * Кнопка «Сыграть еще раз» на последнем экране (экран результатов или экран поражения)
+   * должна открывать первый экран.
+   */
+  element.querySelector(`.main-replay`).addEventListener(`click`, () => showWindow(mainWelcome()));
+  return element;
+};
 
 export default mainResultSuccess;

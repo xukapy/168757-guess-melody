@@ -9,10 +9,13 @@ const mainSection = document.querySelector(`div.app > section.main`);
  * @param {Element} templateElement
  */
 const showWindow = (templateElement) => {
+/*
   const previousWindow = mainSection.firstChild;
   if (previousWindow) {
     mainSection.removeChild(previousWindow);
   }
+*/
+  mainSection.innerHTML = ``;
   mainSection.appendChild(templateElement);
 };
 
