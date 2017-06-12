@@ -1,5 +1,5 @@
-import getElementFromTemplate from './template-utils';
-import timeFormat from './time-format';
+import getElementFromTemplate from '../template-utils';
+import timeFormat from '../time-format';
 const totalTime = 120000; // 2 минуты
 const mainLevelTimer = (time) => {
   const timeLeft = timeFormat(totalTime, time);

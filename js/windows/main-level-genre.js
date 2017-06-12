@@ -1,5 +1,5 @@
-import getElementFromTemplate from './template-utils';
-import showWindow from './template-render';
+import getElementFromTemplate from '../template-utils';
+import showWindow from '../template-render';
 import mainResultSuccess from './main-result-success';
 import mainResultLoss from './main-result-loss';
 import mainLevelTimer from './main-level-timer';
@@ -53,9 +53,9 @@ const mainLevelGenre = (state, questions) => {
   mainLevelGenreElement.querySelector(`.genre-answer-send`).addEventListener(`click`, (event) => {
     event.preventDefault();
     if (Math.round(Math.random()) === 0) {
-      showWindow(mainResultLoss);
+      showWindow(mainResultLoss());
     } else {
-      showWindow(mainResultSuccess);
+      showWindow(mainResultSuccess());
     }
   });
   return mainLevelGenreElement;

@@ -1,5 +1,5 @@
-import getElementFromTemplate from './template-utils';
-import showWindow from './template-render';
+import getElementFromTemplate from '../template-utils';
+import showWindow from '../template-render';
 import mainLevelGenre from './main-level-genre';
 import mainLevelTimer from './main-level-timer';
 
