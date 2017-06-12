@@ -1,6 +1,8 @@
 import getElementFromTemplate from './template-utils';
 import mainLevelArtist from './main-level-artist';
+import mainLevelGenre from './main-level-genre';
 import showWindow from './template-render';
+import {initialState, questions} from './game-data';
 
 const mainWelcome = getElementFromTemplate(`<!-- Приветствие -->
   <section class="main main--welcome">
@@ -18,6 +20,14 @@ const mainWelcome = getElementFromTemplate(`<!-- Приветствие -->
  * Экран первой игры .main--level-artist должен показываться по нажатию
  * на кнопку Play — блок .main-play на главном экране.
  */
-mainWelcome.querySelector(`.main-play`).addEventListener(`click`, () => showWindow(mainLevelArtist));
+mainWelcome.querySelector(`.main-play`).addEventListener(`click`, () => {
+  let firstWindow;
+  if (questions[0].type === `artist`) {
+    firstWindow = mainLevelArtist(initialState, questions);
+  } else {
+    firstWindow = mainLevelGenre(initialState, questions);
+  }
+  showWindow(firstWindow);
+});
 
 export default mainWelcome;
