@@ -1,7 +1,7 @@
 const initialState = Object.freeze({
   level: 0,  // начальный уровень
   lives: 3,  // кол-во допустимых ошибок
-  time: 35000   // милисекунд
+  time: 0   // милисекунд
 });
 
 const questions = Object.freeze([
@@ -11,7 +11,7 @@ const questions = Object.freeze([
     artists: [`Пелагея`, `Краснознаменная дивизия моей бабушки`, `Lorde`]
   },
   {
-    type: `gendre`,
+    type: `genre`,
     genre: `инди-рок`,
     songs: [{src: ``, genre: `инди-рок`},
       {src: ``, genre: `панк`},

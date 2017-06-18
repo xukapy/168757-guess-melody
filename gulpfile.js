@@ -49,9 +49,6 @@ gulp.task('scripts', function () {
 
 
 gulp.task('test', function () {
-});
-
-gulp.task('test', function () {
   return gulp
     .src(['js/**/*.test.js'], { read: false })
     .pipe(mocha({
