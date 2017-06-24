@@ -61,17 +61,17 @@ export default class LevelGenreView extends AbstractView {
         buttonGenreAnswerSend.disabled = false;
       });
     }
+
     /**
-     * Экран второй игры .main--level-genre должен показываться по нажатию
-     * на любой из вариантов ответа — блок .main-answer на первом игровом экране.
+     * Экран результатов .main--result должен показываться по нажатию
+     * на кнопку «Ответить», блок .genre-answer-send.
+     * Какой из последних экранов: экран поражения или экран результатов
+     * показывать, определяйте случайным образом.
      */
-    const inputAnswerList = this.element.querySelectorAll(`.main-answer-wrapper`);
-    for (const inputAnswer of inputAnswerList) {
-      inputAnswer.addEventListener(`click`, (evt) => {
-        evt.preventDefault();
-        this.onAnswer();
-      });
-    }
+    this.element.querySelector(`.genre-answer-send`).addEventListener(`click`, (event) => {
+      event.preventDefault();
+      this.onAnswer();
+    });
   }
 
   onAnswer() {
