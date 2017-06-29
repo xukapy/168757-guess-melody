@@ -54,17 +54,31 @@ export default class LevelArtistView extends AbstractView {
    * на любой из вариантов ответа — блок .main-answer на первом игровом экране.
    */
   bind() {
+
     const inputAnswerList = this.element.querySelectorAll(`.main-answer-wrapper`);
     for (const inputAnswer of inputAnswerList) {
       inputAnswer.addEventListener(`click`, (evt) => {
         evt.preventDefault();
-        this.onAnswer();
+        this.onAnswer(this.getAnswer());
       });
     }
   }
 
-  onAnswer() {
+  getAnswer() {
+    const result = {type: `artist`};
+    if (this.element.getElementById(`answer-1`).checked) {
+      result.answer = 1;
+    } else if (this.element.getElementById(`answer-2`).checked) {
+      result.answer = 2;
+    } else if (this.element.getElementById(`answer-3`).checked) {
+      result.answer = 3;
+    } else {
+      result.answer = 4;
+    }
+    return result;
+  }
+
+  onAnswer(answer) {
     // Будет переопределен в классе контроллера
   }
 }
-

@@ -8,11 +8,13 @@ const questions = Object.freeze([
   {
     type: `artist`,
     song: {src: ``, artist: `Пелагея`},
+    answer: 1,
     artists: [`Пелагея`, `Краснознаменная дивизия моей бабушки`, `Lorde`]
   },
   {
     type: `genre`,
     genre: `инди-рок`,
+    answer: [1, 4],
     songs: [{src: ``, genre: `инди-рок`},
       {src: ``, genre: `панк`},
       {src: ``, genre: `классика`},

@@ -6,9 +6,9 @@ const mainSection = document.querySelector(`div.app > section.main`);
 
 /**
  * Отображение игрового окна по шаблону
- * @param {Element} templateElement
+ * @param {Object} view
  */
-const showWindow = (templateElement) => {
+const showWindow = (view) => {
 /*
   const previousWindow = mainSection.firstChild;
   if (previousWindow) {
@@ -16,7 +16,7 @@ const showWindow = (templateElement) => {
   }
 */
   mainSection.innerHTML = ``;
-  mainSection.appendChild(templateElement);
+  mainSection.appendChild(view.element);
 };
 
 export default showWindow;
