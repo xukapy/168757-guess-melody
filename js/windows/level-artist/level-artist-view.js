@@ -1,6 +1,8 @@
 import AbstractView from '../../view';
 import timeFormat from '../../time-format';
 import gameSettings from '../../data/game-settings';
+import initializeCountdown from '../../timer';
+import initializePlayer from '../../player';
 
 const drawTimer = (time) => {
   const timeLeft = timeFormat(gameSettings.time, time);
@@ -54,6 +56,8 @@ export default class LevelArtistView extends AbstractView {
    * на любой из вариантов ответа — блок .main-answer на первом игровом экране.
    */
   bind() {
+    this._removePlayer = initializePlayer(this.element.querySelector(`.player-wrapper`), this.question.song.src);
+    this._removeTimer = initializeCountdown(this.element, 0, gameSettings.time / 1000);
 
     const inputAnswerList = this.element.querySelectorAll(`.main-answer-wrapper`);
     for (const inputAnswer of inputAnswerList) {
@@ -62,6 +66,11 @@ export default class LevelArtistView extends AbstractView {
         this.onAnswer(this.getAnswer());
       });
     }
+  }
+
+  unbind() {
+    this._removeTimer();
+    this._removePlayer();
   }
 
   getAnswer() {
