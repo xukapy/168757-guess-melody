@@ -76,19 +76,19 @@ export default class LevelGenreView extends AbstractView {
 
   getAnswer() {
     const result = {type: `genre`, answer: []};
-    if (this.element.getElementById(`answer-1`).checked) {
+    if (document.getElementById(`answer-1`).checked) {
       result.answer.push(1);
     }
 
-    if (this.element.getElementById(`answer-2`).checked) {
+    if (document.getElementById(`answer-2`).checked) {
       result.answer.push(2);
     }
 
-    if (this.element.getElementById(`answer-3`).checked) {
+    if (document.getElementById(`answer-3`).checked) {
       result.answer.push(3);
     }
 
-    if (this.element.getElementById(`answer-4`).checked) {
+    if (document.getElementById(`answer-4`).checked) {
       result.answer.push(4);
     }
     return result;

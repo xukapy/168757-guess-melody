@@ -34,7 +34,7 @@ class Application {
     this.changeController(getControllerIDFromHash(location.hash));
   }
 
-  showWellcome() {
+  showWelcome() {
     location.hash = ControllerID.WELCOME;
   }
 

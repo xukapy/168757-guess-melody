@@ -75,11 +75,11 @@ export default class LevelArtistView extends AbstractView {
 
   getAnswer() {
     const result = {type: `artist`};
-    if (this.element.getElementById(`answer-1`).checked) {
+    if (document.getElementById(`answer-1`).checked) {
       result.answer = 1;
-    } else if (this.element.getElementById(`answer-2`).checked) {
+    } else if (document.getElementById(`answer-2`).checked) {
       result.answer = 2;
-    } else if (this.element.getElementById(`answer-3`).checked) {
+    } else if (document.getElementById(`answer-3`).checked) {
       result.answer = 3;
     } else {
       result.answer = 4;

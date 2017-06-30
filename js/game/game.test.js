@@ -28,11 +28,11 @@ describe(`Guess Melody Game Logic`, () => {
 
   describe(`Answer validator`, () => {
     it(`should check right answers`, () => {
-      assert(checkAnswer(Object.assign({}, questions[0]), {type: `artist`, answer: 1}));
+      assert(checkAnswer(Object.assign({}, questions[0]), {type: `artist`, answer: 2}));
       assert(checkAnswer(Object.assign({}, questions[1]), {type: `genre`, answer: [1, 4]}));
     });
     it(`should not check wrong answers`, () => {
-      assert(!checkAnswer(Object.assign({}, questions[0]), {type: `artist`, answer: 2}));
+      assert(!checkAnswer(Object.assign({}, questions[0]), {type: `artist`, answer: 3}));
       assert(!checkAnswer(Object.assign({}, questions[1]), {type: `genre`, answer: [2, 3]}));
     });
     it(`should not check partly right answers`, () => {
