@@ -4,7 +4,7 @@ import ResultLossView from '../windows/result-loss/result-loss-view';
 import changeView from '../template-render';
 import {initialState, questions} from '../data/game-data';
 import {checkLastLevel, checkAnswer, nextLevel} from '../game/game';
-import Application from '../application';
+import application from '../application';
 
 class GameScreen {
   constructor() {
@@ -37,16 +37,13 @@ class GameScreen {
   }
 
   win() {
-    Application.showStats();
+    application.showStats();
   }
 
   loose() {
     this.view = new ResultLossView();
     this.view.onReplay = () => {
-      // this.state = initialState;
-      // this.view = this.createLevel();
-      // this.init();
-      Application.showWelcome();
+      application.showWelcome();
     };
   }
 

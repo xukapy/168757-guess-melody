@@ -1,3 +1,3 @@
-import Application from './application';
+import application from './application';
 
-Application.showWelcome();
+application.showWelcome();

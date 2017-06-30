@@ -2,18 +2,53 @@ import welcomeScreen from './screen/welcome-screen';
 import gameScreen from './screen/game-screen';
 import statsScreen from './screen/stats-screen';
 
-export default class Application {
+const ControllerID = {
+  WELCOME: ``,
+  GAME: `game`,
+  STATS: `statistics`
+};
 
-  static showWelcome() {
-    welcomeScreen.init();
+const getControllerIDFromHash = (hash) => hash.replace(`#`, ``);
+
+
+class Application {
+
+  constructor() {
+    this.routes = {
+      [ControllerID.WELCOME]: welcomeScreen,
+      [ControllerID.GAME]: gameScreen,
+      [ControllerID.STATS]: statsScreen,
+    };
+
+    window.onhashchange = () => {
+      this.changeController(getControllerIDFromHash(location.hash));
+    };
   }
 
-  static showGame() {
-    gameScreen.init();
+  changeController(route = ControllerID.WELCOME) {
+    const controller = this.routes[route];
+    controller.init();
   }
 
-  static showStats(stats) {
-    statsScreen.init(stats);
+  init() {
+    this.changeController(getControllerIDFromHash(location.hash));
+  }
+
+  showWellcome() {
+    location.hash = ControllerID.WELCOME;
+  }
+
+  showGame() {
+    location.hash = ControllerID.GAME;
+  }
+
+  showStats() {
+    location.hash = ControllerID.STATS;
   }
 
 }
+
+const application = new Application();
+application.init();
+
+export default application;

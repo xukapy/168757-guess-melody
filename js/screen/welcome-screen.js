@@ -1,6 +1,6 @@
 import changeView from '../template-render';
 import WelcomeView from '../windows/welcome/welcome-view';
-import Application from '../application';
+import application from '../application';
 
 class Welcome {
   constructor() {
@@ -10,7 +10,7 @@ class Welcome {
   init() {
     changeView(this.view);
     this.view.onStart = () => {
-      Application.showGame();
+      application.showGame();
     };
   }
 }
