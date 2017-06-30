@@ -14,12 +14,12 @@ export default class ResultLossView extends AbstractView {
   bind() {
     this.element.querySelector(`.main-replay`).addEventListener(`click`, (evt) => {
       evt.preventDefault();
-      this.onClick();
+      this.onReplay();
     });
 
   }
 
-  onClick() {
+  onReplay() {
     // Будет переопределен в классе контроллера
   }
 }

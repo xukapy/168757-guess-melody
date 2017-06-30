@@ -9,13 +9,19 @@ const checkTimeExpire = (state) => {
 };
 
 const checkAnswer = (question, answer) => {
+
+  if (question.type !== answer.type) {
+    throw new Error(`Ответ не соответствует вопросу`);
+  }
+
   if (question.type === `artist`) {
-    return question.song.artist === answer.artist;
+    return question.answer === answer.answer;
   } else if (question.type === `genre`) {
     /**
      * Массив ответов
      * @type {Array}
      */
+    /*
     const result = [];
     question.songs.forEach((item, index) => {
       if (item.genre === question.genre) {
@@ -25,17 +31,22 @@ const checkAnswer = (question, answer) => {
     if (!answer.songs) {
       return false;
     }
+    */
     /**
      * Если количество ответов не совпадает - ошибка
      */
-    if (result.length !== answer.songs.length) {
+    if (!answer.answer) {
+      return false;
+    }
+
+    if (question.answer.length !== answer.answer.length) {
       return false;
     }
     /**
      * Если хотя бы один элемент не совпадает - ошибка
      */
-    for (let i = 0; i < result.length; i++) {
-      if (result[i] !== answer.songs[i]) {
+    for (let i = 0; i < question.answer.length; i++) {
+      if (question.answer[i] !== answer.answer[i]) {
         return false;
       }
     }
@@ -65,4 +76,8 @@ const calcStatistics = (state, statistics) => {
   return (losers.length / (statistics.length + 1)) * 100;
 };
 
-export {checkLastLevel, checkTimeExpire, checkAnswer, calcStatistics};
+const nextLevel = (state) => {
+  return Object.assign({}, state, {level: state.level + 1});
+};
+
+export {checkLastLevel, checkTimeExpire, checkAnswer, calcStatistics, nextLevel};

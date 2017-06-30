@@ -28,21 +28,21 @@ describe(`Guess Melody Game Logic`, () => {
 
   describe(`Answer validator`, () => {
     it(`should check right answers`, () => {
-      assert(checkAnswer(Object.assign({}, questions[0]), {type: `artist`, artist: `Пелагея`}));
-      assert(checkAnswer(Object.assign({}, questions[1]), {type: `genre`, songs: [0, 3]}));
+      assert(checkAnswer(Object.assign({}, questions[0]), {type: `artist`, answer: 1}));
+      assert(checkAnswer(Object.assign({}, questions[1]), {type: `genre`, answer: [1, 4]}));
     });
     it(`should not check wrong answers`, () => {
-      assert(!checkAnswer(Object.assign({}, questions[0]), {type: `artist`, artist: `Lorde`}));
-      assert(!checkAnswer(Object.assign({}, questions[1]), {type: `genre`, songs: [1, 2]}));
+      assert(!checkAnswer(Object.assign({}, questions[0]), {type: `artist`, answer: 2}));
+      assert(!checkAnswer(Object.assign({}, questions[1]), {type: `genre`, answer: [2, 3]}));
     });
     it(`should not check partly right answers`, () => {
-      assert(!checkAnswer(Object.assign({}, questions[1]), {type: `genre`, songs: [0, 1]}));
-      assert(!checkAnswer(Object.assign({}, questions[1]), {type: `genre`, songs: [0]}));
+      assert(!checkAnswer(Object.assign({}, questions[1]), {type: `genre`, answer: [1, 2]}));
+      assert(!checkAnswer(Object.assign({}, questions[1]), {type: `genre`, answer: [1]}));
     });
     it(`should deal with corner cases correctly`, () => {
-      assert(!checkAnswer(Object.assign({}, questions[0]), {type: `artist`, artist: null}));
-      assert(!checkAnswer(Object.assign({}, questions[1]), {type: `genre`, songs: []}));
-      assert(!checkAnswer(Object.assign({}, questions[1]), {type: `genre`, songs: null}));
+      assert(!checkAnswer(Object.assign({}, questions[0]), {type: `artist`, answer: null}));
+      assert(!checkAnswer(Object.assign({}, questions[1]), {type: `genre`, answer: []}));
+      assert(!checkAnswer(Object.assign({}, questions[1]), {type: `genre`, answer: null}));
     });
   });
 });
