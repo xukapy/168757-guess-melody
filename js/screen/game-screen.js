@@ -16,6 +16,7 @@ class GameScreen {
   init() {
     changeView(this.view);
     this.view.onAnswer = (answer) => {
+      this.view.unbind();
       const result = checkAnswer(questions[this.state.level], answer);
       const isLastLevel = checkLastLevel(this.state);
 
