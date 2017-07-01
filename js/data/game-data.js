@@ -7,8 +7,8 @@ const initialState = Object.freeze({
 const questions = Object.freeze([
   {
     type: `artist`,
-    song: {src: ``, artist: `Пелагея`},
-    answer: 1,
+    song: {src: `./audio/krasnoznamennaya_diviziya_imeni_moei_babushki_vesna_v_toronto.mp3`, artist: `Краснознаменная дивизия моей бабушки`},
+    answer: 2,
     artists: [`Пелагея`, `Краснознаменная дивизия моей бабушки`, `Lorde`]
   },
   {

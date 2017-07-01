@@ -80,4 +80,8 @@ const nextLevel = (state) => {
   return Object.assign({}, state, {level: state.level + 1});
 };
 
-export {checkLastLevel, checkTimeExpire, checkAnswer, calcStatistics, nextLevel};
+const minusLives = (state) => {
+  return Object.assign({}, state, {lives: state.lives - 1});
+};
+
+export {checkLastLevel, checkTimeExpire, checkAnswer, calcStatistics, nextLevel, minusLives};

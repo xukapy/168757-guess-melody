@@ -1,6 +1,6 @@
 import changeView from '../template-render';
 import ResultSuccessView from '../windows/result-success/result-success-view';
-import Application from '../application';
+import application from '../application';
 
 class StatsScreen {
   constructor() {
@@ -10,7 +10,7 @@ class StatsScreen {
   init() {
     changeView(this.view);
     this.view.onReplay = () => {
-      Application.showWelcome();
+      application.showWelcome();
     };
   }
 }
