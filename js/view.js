@@ -21,7 +21,7 @@ export default class AbstractView {
    * @return {Element}
    */
   get element() {
-    if (!this._element) {
+    if ((!this._element) || (this._element.childElementCount === 0)) {
       this.getMarkup();
     }
     return this._element;

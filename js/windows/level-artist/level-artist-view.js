@@ -60,10 +60,12 @@ export default class LevelArtistView extends AbstractView {
     this._removeTimer = initializeCountdown(this.element, 0, gameSettings.time / 1000);
 
     const inputAnswerList = this.element.querySelectorAll(`.main-answer-wrapper`);
+    let i = 1;
     for (const inputAnswer of inputAnswerList) {
+      const answer = {type: `artist`, answer: i++};
       inputAnswer.addEventListener(`click`, (evt) => {
         evt.preventDefault();
-        this.onAnswer(this.getAnswer());
+        this.onAnswer(answer);
       });
     }
   }
@@ -71,20 +73,6 @@ export default class LevelArtistView extends AbstractView {
   unbind() {
     this._removeTimer();
     this._removePlayer();
-  }
-
-  getAnswer() {
-    const result = {type: `artist`};
-    if (document.getElementById(`answer-1`).checked) {
-      result.answer = 1;
-    } else if (document.getElementById(`answer-2`).checked) {
-      result.answer = 2;
-    } else if (document.getElementById(`answer-3`).checked) {
-      result.answer = 3;
-    } else {
-      result.answer = 4;
-    }
-    return result;
   }
 
   onAnswer(answer) {

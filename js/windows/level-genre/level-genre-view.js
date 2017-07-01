@@ -1,6 +1,7 @@
 import AbstractView from '../../view';
 import timeFormat from '../../time-format';
 import gameSettings from '../../data/game-settings';
+import initializeCountdown from '../../timer';
 
 const drawTimer = (time) => {
   const timeLeft = timeFormat(gameSettings.time, time);
@@ -48,6 +49,8 @@ export default class LevelGenreView extends AbstractView {
   }
 
   bind() {
+    // this._removePlayer = initializePlayer(this.element.querySelector(`.player-wrapper`), this.question.song.src);
+    this._removeTimer = initializeCountdown(this.element, 0, gameSettings.time / 1000);
     /**
      * Кнопка «Ответить» должна быть отключена, disabled, пока не выбран
      * ни один из возможных вариантов ответа.
@@ -74,21 +77,26 @@ export default class LevelGenreView extends AbstractView {
     });
   }
 
+  unbind() {
+    this._removeTimer();
+    // this._removePlayer();
+  }
+
   getAnswer() {
     const result = {type: `genre`, answer: []};
-    if (document.getElementById(`answer-1`).checked) {
+    if (document.getElementById(`a-1`).checked) {
       result.answer.push(1);
     }
 
-    if (document.getElementById(`answer-2`).checked) {
+    if (document.getElementById(`a-2`).checked) {
       result.answer.push(2);
     }
 
-    if (document.getElementById(`answer-3`).checked) {
+    if (document.getElementById(`a-3`).checked) {
       result.answer.push(3);
     }
 
-    if (document.getElementById(`answer-4`).checked) {
+    if (document.getElementById(`a-4`).checked) {
       result.answer.push(4);
     }
     return result;
