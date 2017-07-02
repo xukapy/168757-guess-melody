@@ -84,4 +84,31 @@ const minusLives = (state) => {
   return Object.assign({}, state, {lives: state.lives - 1});
 };
 
-export {checkLastLevel, checkTimeExpire, checkAnswer, calcStatistics, nextLevel, minusLives};
+const preprocessQuestions = (json) => {
+  return json.map((question) => {
+    let preQuestion;
+    if (question.type === `artist`) {
+      let lanswer;
+      const lartists = [];
+      question.answers.forEach((item, i) => {
+        lartists.push(item.title);
+        if (item.isCorrect) {
+          lanswer = i + 1;
+        }
+      });
+      preQuestion = Object.assign({type: `artist`}, {song: {src: question.src}}, {answer: lanswer, artists: lartists});
+    } else {
+      const lanswers = [];
+      question.answers.forEach((item, i) => {
+        if (item.genre === question.genre) {
+          lanswers.push(i + 1);
+        }
+      });
+      preQuestion = {type: `genre`, genre: question.genre, songs: question.answers, answer: lanswers};
+    }
+
+    return preQuestion;
+  });
+};
+
+export {checkLastLevel, checkTimeExpire, checkAnswer, calcStatistics, nextLevel, minusLives, preprocessQuestions};
