@@ -1,6 +1,8 @@
 import welcomeScreen from './screen/welcome-screen';
-import gameScreen from './screen/game-screen';
+import GameScreen from './screen/game-screen';
 import statsScreen from './screen/stats-screen';
+import Loader from './loader';
+import {preprocessQuestions} from './game/game';
 
 const ControllerID = {
   WELCOME: ``,
@@ -13,10 +15,22 @@ const getControllerIDFromHash = (hash) => hash.replace(`#`, ``);
 
 class Application {
 
-  constructor() {
+  loadQuestionsData() {
+   // const preloaderRemove = this.showPreloader();
+    Loader.loadData()
+      .then((response)=>{
+        this.setup(preprocessQuestions(response));
+        this.changeController(getControllerIDFromHash(location.hash));
+      });
+    // this.setup(QuestAdapter.preprocess(json));
+    // preloaderRemove();
+    // this.changeController(getControllerIDFromHash(location.hash));
+  }
+
+  setup(data) {
     this.routes = {
       [ControllerID.WELCOME]: welcomeScreen,
-      [ControllerID.GAME]: gameScreen,
+      [ControllerID.GAME]: new GameScreen(data),
       [ControllerID.STATS]: statsScreen,
     };
 
@@ -31,7 +45,7 @@ class Application {
   }
 
   init() {
-    this.changeController(getControllerIDFromHash(location.hash));
+    this.loadQuestionsData();
   }
 
   showWelcome() {
@@ -49,6 +63,5 @@ class Application {
 }
 
 const application = new Application();
-application.init();
 
 export default application;
