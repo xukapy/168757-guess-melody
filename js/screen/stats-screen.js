@@ -3,11 +3,8 @@ import ResultSuccessView from '../windows/result-success/result-success-view';
 import application from '../application';
 
 class StatsScreen {
-  constructor() {
-    this.view = new ResultSuccessView();
-  }
-
-  init() {
+  init(state) {
+    this.view = new ResultSuccessView(state);
     changeView(this.view);
     this.view.onReplay = () => {
       application.showWelcome();

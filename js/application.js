@@ -10,8 +10,14 @@ const ControllerID = {
   STATS: `statistics`
 };
 
-const getControllerIDFromHash = (hash) => hash.replace(`#`, ``);
-
+const getControllerIDFromHash = (hash) => hash.replace(`#`, ``).split(`?`)[0];
+const getStateFromHash = (hash) => {
+  let encodedState = hash.split(`?`)[1];
+  if (encodedState) {
+    return JSON.parse(decodeURIComponent(encodedState));
+  }
+  return null;
+};
 
 class Application {
 
@@ -20,7 +26,7 @@ class Application {
     Loader.loadData()
       .then((response)=>{
         this.setup(preprocessQuestions(response));
-        this.changeController(getControllerIDFromHash(location.hash));
+        this.changeController(getControllerIDFromHash(location.hash), getStateFromHash(location.hash));
       });
     // this.setup(QuestAdapter.preprocess(json));
     // preloaderRemove();
@@ -35,13 +41,17 @@ class Application {
     };
 
     window.onhashchange = () => {
-      this.changeController(getControllerIDFromHash(location.hash));
+      this.changeController(getControllerIDFromHash(location.hash), getStateFromHash(location.hash));
     };
   }
 
-  changeController(route = ControllerID.WELCOME) {
+  changeController(route = ControllerID.WELCOME, state) {
     const controller = this.routes[route];
-    controller.init();
+    if (state) {
+      controller.init(state);
+    } else {
+      controller.init();
+    }
   }
 
   init() {
@@ -56,8 +66,8 @@ class Application {
     location.hash = ControllerID.GAME;
   }
 
-  showStats() {
-    location.hash = ControllerID.STATS;
+  showStats(state) {
+    location.hash = ControllerID.STATS + `?` + encodeURIComponent(JSON.stringify(state));
   }
 
 }

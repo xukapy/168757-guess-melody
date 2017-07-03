@@ -1,19 +1,24 @@
 const SERVER_URL = `https://intensive-ecmascript-server-btfgudlkpi.now.sh/guess-melody`;
+const USER_NAME = `xukapy`;
 
 export default class Loader {
+
   static loadData() {
     return fetch(`${SERVER_URL}/questions`)
       .then((response)=>{
         return response.json();
       });
   }
-/*
-  static async loadResults(name = DEFAULT_NAME) {
-    const response = await fetch(`${SERVER_URL}/stats/${name}`);
-    return response.json();
+
+  static loadResults() {
+    return fetch(`${SERVER_URL}/stats/${USER_NAME}`)
+      .then((response)=>{
+        return response.json();
+      })
+      .catch(()=>[]);
   }
 
-  static async saveResults(data, name = DEFAULT_NAME) {
+  static saveResults(data) {
     const requestSettings = {
       body: JSON.stringify(data),
       headers: {
@@ -21,7 +26,7 @@ export default class Loader {
       },
       method: `POST`
     };
-    return fetch(`${SERVER_URL}/stats/${name}`, requestSettings);
+    return fetch(`${SERVER_URL}/stats/${USER_NAME}`, requestSettings);
   }
-*/
+
 }

@@ -1,5 +1,6 @@
 import gameSettings from '../data/game-settings';
 
+
 const checkLastLevel = (state) => {
   return state.level >= gameSettings.maxlevel;
 };
@@ -54,7 +55,6 @@ const checkAnswer = (question, answer) => {
   }
   return false;
 };
-
 
 const calcStatistics = (state, statistics) => {
   /**

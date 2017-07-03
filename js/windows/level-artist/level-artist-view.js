@@ -57,7 +57,7 @@ export default class LevelArtistView extends AbstractView {
    */
   bind() {
     this._removePlayer = initializePlayer(this.element.querySelector(`.player-wrapper`), this.question.song.src);
-    this._removeTimer = initializeCountdown(this.element, 0, gameSettings.time / 1000);
+    this._removeTimer = initializeCountdown(this.element, this.state.time / 1000, gameSettings.time / 1000);
 
     const inputAnswerList = this.element.querySelectorAll(`.main-answer-wrapper`);
     let i = 1;

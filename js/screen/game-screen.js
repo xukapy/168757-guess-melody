@@ -3,7 +3,7 @@ import LevelGenreView from '../windows/level-genre/level-genre-view';
 import ResultLossView from '../windows/result-loss/result-loss-view';
 import changeView from '../template-render';
 import {initialState} from '../data/game-data';
-import {checkLastLevel, checkAnswer, nextLevel, minusLives} from '../game/game';
+import {checkLastLevel, checkAnswer, nextLevel, minusLives, checkTimeExpire} from '../game/game';
 import application from '../application';
 
 export default class GameScreen {
@@ -14,9 +14,9 @@ export default class GameScreen {
 
   init() {
     changeView(this.view);
+    this.startLeveLTime = Date.now();
     this.view.onAnswer = (answer) => {
       this.view.unbind();
-
       if (checkAnswer(this.questions[this.state.level], answer)) {
         this.levelUp();
       } else {
@@ -26,7 +26,11 @@ export default class GameScreen {
   }
 
   levelUp() {
+    this.state.time = this.state.time + Date.now() - this.startLeveLTime;
     this.state = nextLevel(this.state);
+    if (checkTimeExpire(this.state)) {
+      this.loose();
+    }
     if (!checkLastLevel(this.state)) {
       this.view = this.createLevel();
       this.init();
@@ -36,8 +40,10 @@ export default class GameScreen {
   }
 
   win() {
+    const winState = Object.assign({}, this.state);
+    // Подготовка презентера игры к новой игре, хотя вопросы надо перекачать
     this.startGame();
-    application.showStats();
+    application.showStats(winState);
   }
 
   die() {
@@ -45,7 +51,7 @@ export default class GameScreen {
     if (this.state.lives === 0) {
       this.loose();
     } else {
-      this.init();
+      this.levelUp();
     }
   }
 
@@ -63,9 +69,6 @@ export default class GameScreen {
     this.view = this.createLevel(this.state);
   }
 
-  stopGame() {
-
-  }
 
   createLevel() {
     let level;
