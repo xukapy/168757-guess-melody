@@ -2,6 +2,7 @@ import AbstractView from '../../view';
 import timeFormat from '../../time-format';
 import gameSettings from '../../data/game-settings';
 import initializeCountdown from '../../timer';
+import initializePlayer from '../../player';
 
 const drawTimer = (time) => {
   const timeLeft = timeFormat(gameSettings.time, time);
@@ -24,6 +25,7 @@ export default class LevelGenreView extends AbstractView {
     super();
     this.state = state;
     this.question = question;
+    this._removePlayer = [];
   }
   get template() {
     const questionString = this.question.songs.map((artist, index) => `      <div class="genre-answer">
@@ -49,8 +51,14 @@ export default class LevelGenreView extends AbstractView {
   }
 
   bind() {
-    // this._removePlayer = initializePlayer(this.element.querySelector(`.player-wrapper`), this.question.song.src);
-    this._removeTimer = initializeCountdown(this.element, 0, gameSettings.time / 1000);
+    this._removeTimer = initializeCountdown(this.element, this.state.time / 1000, gameSettings.time / 1000);
+    const playerElementList = this.element.querySelectorAll(`.player-wrapper`);
+    let index = 0;
+    for (const playerElement of playerElementList) {
+      this._removePlayer.push(initializePlayer(playerElement, this.question.songs[index].src));
+      index++;
+    }
+
     /**
      * Кнопка «Ответить» должна быть отключена, disabled, пока не выбран
      * ни один из возможных вариантов ответа.
@@ -79,7 +87,9 @@ export default class LevelGenreView extends AbstractView {
 
   unbind() {
     this._removeTimer();
-    // this._removePlayer();
+    this._removePlayer.forEach((item) => {
+      item();
+    });
   }
 
   getAnswer() {
